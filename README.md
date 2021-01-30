@@ -1,8 +1,4 @@
-# Java Alura
-
-Material criado durante cursos de Java no Alura. 
-
-# Anotações Java
+# Java Alura - Anotações
 
 ## Curso 1 (De 26/01/2021 a ??? - Revisão)
 
@@ -154,6 +150,74 @@ Como ele não é um tipo primitivo, nós declaramos ele com a inicial maiúscula
 
 Também podemos concatenar strings com strings ou com outros tipos usando o sinal ``+``
 
-#### TODO falar sobre Ifs e escopo
+#### Estrutura de decisão, famoso if 
 
+O if no Java é igual ao C. Se a gente tiver somente uma ação para fazer depois de um if, a gente não precisa das chaves, mas é boa prática usar elas mesmo quando temos uma ação.
 
+Também temos o else if, da mesma forma que temos no C. 
+
+Exemplo: 
+
+```java
+
+if (idade >= 18) {
+    System.out.println("Você tem mais de 18 anos, seja bem-vindo");
+} else if (quantidadePessoas >= 2) {
+    System.out.println("Você não tem 18 anos, mas pode entrar, pois está acompanhado");
+} else {
+    System.out.println("Infelizmente você não pode entrar");
+}
+```
+
+#### Boolean, expressões booleanas e alguns operadores lógicos
+
+O ``boolean`` é mais um tipo primitivo do Java. Esse tipo aceita somente duas coisas: ``true`` e ``false``. 
+
+```java
+boolean trueCondition = true;
+boolean falseCondition = false; 
+```
+
+Podemos também colocar uma expressão booleana dentro de um boolean: 
+
+```java
+boolean peopleQuantity = 3;
+boolean booleanExpression = peopleQuantity >= 2;
+```
+
+Se imprimirmos a variável booleanExpression, teremos o valor ``true`` como resposta. 
+
+O que colocamos dentro dos parênteses de um ``if`` também é uma expressão booleana. Mesmo se não usarmos operadores lógicos, ainda é um boolean. 
+
+```java
+if (booleanExpression) {
+    System.out.println("Bem-vindo");
+} else {
+    System.out.println("Você não pode entrar");
+}
+```
+
+Quando colocamos só o nome da variável dentro do parênteses do ``if``, é a mesma coisa se colocassemos ``if (booleanExpression == true)``. 
+
+Falamos de operadores lógicos um pouco mais acima. O Java também tem o operador ``||`` e ``&&``, igual ao C. `
+
+#### Escopo de variáveis
+
+Escopo nada mais é do que quando uma variável nasce e morre. Por exemplo: 
+
+```java
+public static void main (String[] args) {
+    int primeiraVariavel = 1;
+    int segundaVariavel = 2; 
+
+    if (primeiraVariavel == 1) {
+        boolean teste = true;
+    } else {
+        boolean teste = false; 
+    }
+}
+```
+
+As variáveis ``primeiraVariavel`` e ``segundaVariavel`` existem a partir da linha 212 e 213 respectivamente e morrem na linha ``220`` que é justamente onde tem a chave que fecha o ``public static void main``. Já a variável ``teste`` nasce a primeira vez na linha ``216`` e morre na linha seguinte, e nasce de novo na linha ``218`` e morre na linha seguinte, seguindo a mesma regra da anterior. Se eu tentar printar ``teste`` depois da linha ``219``, eu não vou conseguir porque ela não foi declarada dentro do escopo que ``sysout`` está. 
+
+Obs: eu não criei o arquivo ``TestaEscopo`` no Eclipse porque achei melhor explicar aqui. 
