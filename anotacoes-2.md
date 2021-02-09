@@ -64,7 +64,7 @@ Antes, quando declaravámos uma variável e não era atribuido nenhum valor à e
 
 Agora, quando criamos uma classe, podemos atribuir alguns valores padrão para cada atributo. Mesmo se não fizermos isso deliberadamente, quando criarmos um objeto, o Java zera todos os valores dos atributos. Então se printarmos o saldo de um objeto tipo conta que ainda não teve um saldo definido, o valor que receberemos sera ``0``
 
-#### Métodos
+### Métodos
 
 Quando fazemos a especificação de uma conta, definimos quais são as caracteristicas dela, o que podemos chamar de **atributos** e também precisamos definir qual será o comportamento e como a conta executará as ações desse comportamento. Para isso usamos métodos, que é algo parecido com as funções do C.
 
@@ -115,3 +115,98 @@ Então, parecido quando vamos mexer em um atributo do objeto, nós invocamos o m
 
 Os métodos saca e transfere são parecidos. Dessa vez teremos um retorno, por isso declaramos como public boolean. Definimos os argumentos que eles receberão e depois como farão a ação. 
 
+### Composição de objetos
+
+Vamos supor que a partir de agora, queremos saber o nome completo, CPF e profissão do titular da conta do bytebank. Nós podemos adicionar esses atributos na nossa classe conta, conforme abaixo: 
+
+```java
+public class Conta {
+    // saldo, agência, conta e titular
+
+    String nome;
+    String cpf;
+    String profissao;
+
+    // Métodos depositar, sacar e transferir
+}
+```
+
+Por mais que possa parecer que faz sentido ter essas informações na conta, podemos criar uma classe chamada ``Cliente`` e incluir esses atributos. 
+
+```java
+public class Cliente {
+    String nome;
+    String cpf;
+    String profissao;
+}
+```
+
+Como separamos as informações do cliente em outra classe, e essas dados do cliente são do titular também, nós podemos falar que ``titular`` é do tipo ``Cliente``, assim: 
+
+```java
+public class Conta {
+    double saldo;
+    int agencia;
+    int conta;
+    Cliente titular;
+
+    // Métodos
+}
+```
+
+Agora podemos criar um objeto do tipo ``Cliente`` e depois atribuir ao titular da conta. Assim:
+
+```java
+public class TestaConta {
+    public static void main(String[] args) {
+        Cliente luiz = new Cliente();
+        luiz.nome = "Luiz Medeiros";
+        luiz.cpf = "222.222.222-22";
+        luiz.profissao = "Programador";
+
+        Conta contaDoLuiz = new Conta();
+        contaDoLuiz.titular = luiz;
+    }
+}
+```
+
+Podemos fazer isso de um jeito melhor também (claro).
+
+```java
+public class TestaConta {
+    public static void main(String[] args) {
+        Conta contaDoLuiz = new Conta();
+        contaDoLuiz.titular = new Cliente();
+    }
+}
+```
+
+Assim eu consigo já instanciar ``Cliente`` e se quiser, posso acessar diretamente um atributo da classe.
+
+```java
+public class TestaConta {
+    public static void main(String[] args) {
+        Conta contaDoLuiz = new Conta();
+        contaDoLuiz.titular = new Cliente();
+
+        contaDoLuiz.titular.nome = "Luiz Medeiros";
+    }
+}
+```
+
+Caso houver a necessidade, nós podemos criar um objeto ``Cliente`` toda vez que uma ``Conta`` for instanciada.
+
+```java
+public class Conta {
+    double saldo;
+    int agencia;
+    int conta;
+    Cliente titular = new Cliente();
+
+    // Métodos
+}
+```
+
+A separação de atributos em várias classes é algo normal dentro de Java e provavelmente de outras linguagens OO.
+
+#### TODO: criar resumo sobre encapsulamento e getters e setters

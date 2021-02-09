@@ -35,9 +35,15 @@ public class Conta {
 		return this.conta;
 	}
 	
-	public void setConta(int novaConta) {
-		this.conta = novaConta;
+	public void setConta(int conta) {
+		this.conta = conta;
 	}
 	
+	public int getAgencia() {
+		return this.agencia;
+	}
 	
+	public void setAgencia(int agencia) {
+		this.agencia = agencia;
+	}
 }
