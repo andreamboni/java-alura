@@ -209,4 +209,50 @@ public class Conta {
 
 A separação de atributos em várias classes é algo normal dentro de Java e provavelmente de outras linguagens OO.
 
-#### TODO: criar resumo sobre encapsulamento e getters e setters
+### Encapsulamento
+
+Quando definimos os nossos métodos na classe ``Conta``, nós inserimos uma lógica para que o ``saldo`` nunca fique negativo, mas isso pode ser facilmente contornado quando fazemos acessamos diretamente o atríbuto e colocamos um valor maior do que temos em saldo.  
+
+Para previnir que isso acontece, precisamos encontrar uma forma para os atributos serem acessados somente através dos métodos, e para fazer isso, nós temos que **encapsular** os nosso atributos. E para isso temos a palavra reserva ``private``. Agora a nossa classe conta ficaria assim: 
+
+```java
+public class Conta {
+    private double saldo;
+    private int agencia;
+    private int conta;
+    private Cliente titular = new Cliente();
+
+    // Métodos
+}
+```
+
+Dessa forma, para inserir algum valor no saldo, por exemplo, vamos ter que usar obrigatóriamente um dos métodos que a gente criou: saca, deposita e transfere. 
+
+### Getters e Setters
+
+Agora que encapsulamos tudo, nós precisamos criar os métodos para acessar os atributos ``agência`` e ``conta``. Vamos precisar de dois métodos para cada atributo: uma para definir e outro para verificar os valores. Em Java é usado a nomenclatura **Getter** para verificar o valor e **Setter** para definir o valor e usamos esses termos no nome do método. Assim: 
+
+```java
+public class Conta {
+    // Atributos
+
+    // Outros métodos
+
+    public int getAgencia() {
+        return this.agencia;
+    }
+
+    public void setAgencia(int agencia) {
+        this.agencia = agencia;
+    }
+
+    public int getConta() {
+        return this.conta;
+    }
+
+    public void setConta(int conta) {
+        this.conta = conta;
+    }
+}
+```
+
