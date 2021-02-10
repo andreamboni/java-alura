@@ -256,3 +256,6 @@ public class Conta {
 }
 ```
 
+#### TODO: resumo sobre construtores e static
+
+Depois disso dar uma olhada no exemplo de dois construtores no curso e revisar o que vc escreveu tanto do primeiro quanto do segundo curso.
