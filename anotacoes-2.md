@@ -1,4 +1,4 @@
-# Curso 2 (De 30/01/2021 a ??? - Revisão)
+# Curso 2 (De 30/01/2021 a 09/02/2021 - Revisão)
 
 ## Java OO
 
@@ -256,6 +256,57 @@ public class Conta {
 }
 ```
 
-#### TODO: resumo sobre construtores e static
+### Construtores
 
-Depois disso dar uma olhada no exemplo de dois construtores no curso e revisar o que vc escreveu tanto do primeiro quanto do segundo curso.
+Em alguns cenários, nós queremos que um objeto sempre tenha algumas informações. No nosso caso, nós queremos que toda conta, quando instanciada, tenha agência e conta. Para fazer isso, nós vamos criar um construtor na nossa classe Conta. 
+
+O Java já nos dá um construtor padrão quando criamos uma classe. Mas a partir do momento que criamos um construtor, aquele construtor padrão não pode ser mais utilizado. 
+
+```java
+public class Conta {
+    // Atributos
+
+	public Conta(int agencia, int conta) {
+		if(agencia >= 0 && conta >= 0) {
+			this.agencia = agencia;
+			this.conta = conta;
+		} return;
+	
+    // Métodos
+}
+```
+
+Dentro desse construtor, nós colocamos uma validação para que não seja cadastrada nenhuma agência ou conta com número negativo. 
+
+Agora, toda vez que eu for criar um novo objeto Conta, eu vou ser obrigado a informar os parametros ``agencia`` e ``conta``
+
+#### Static
+
+Vamos supor que queremos saber quantas contas já foram instanciadas. Para isso, precisamos declarar uma variável que vai fazer essa contagem pra gente. Então vamos declarar ela como um atributo da classe Conta. 
+
+```java
+public class Conta {
+    // Atributos
+    private static int total;
+
+    // Métodos
+}
+```
+
+A palavra chave static transforma a variável total em um atributo da classe e não do objeto. Por exemplo: quando criamos uma conta e definimos um saldo, aquele saldo vale para aquela conta, por isso usamos o this nos métodos de saca, deposita e transfere. Já no caso do total, esse valor não é de um objeto especifico, e sim da classe como um todo. É tipo uma variável global.
+
+Agora, vamos completar o nosso construtor: 
+
+```java
+	public Conta(int agencia, int conta) {
+		Conta.total++;
+		System.out.println("O total de contas é " + Conta.total);
+		if(agencia >= 0 && conta >= 0) {
+			this.agencia = agencia;
+			this.conta = conta;
+		} return;
+```
+
+#### Quando revisar: 
+
+Depois disso dar uma olhada no exemplo de dois construtores no curso.
