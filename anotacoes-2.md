@@ -6,7 +6,7 @@
 
 Nesse curso nós vamos fazer um banco chamado bytebank. Esse banco terá quatro atributos: saldo, conta, agência e titular. 
 
-Antes de sair criando contas e me dando o saldo que eu quiser, eu preciso criar uma especificação para essa conta. Como se fosse um blueprint de uma casa. 
+Antes de criar a conta, eu preciso criar as especificações dela: quais são as características e como será o funcionamento. 
 
 Para isso, eu vou criar uma classe chamada ``Conta`` e colocar os atributos dela: 
 
@@ -19,9 +19,9 @@ public class Conta {
 }
 ```
 
-Nessa classe eu não uso ``public static void main`` porque ele não será o ponto de partida da minha aplicação. Essa classe contém as regras que eu vou usar para criar contas em outras classes. São os atributos para que um **objeto Conta** vai ter quando for criado. 
+Nessa classe eu não uso ``public static void main`` porque ele não será o ponto de partida da minha aplicação. Essa classe contém as regras que eu vou usar para criar contas em outras classes. São os atributos que um **objeto Conta** vai ter quando for criado. 
 
-Os atributos nada mais são que **caracteristicas da classe**, que também serão as caracteristicas dos objetos que for criar do tipo ``Conta``. 
+Os atributos nada mais são que **características da classe**, que também serão dos objetos do tipo ``Conta``.
 
 Outros sinônimos para atributos nesse contexto são **campos** ou **propriedade**. 
 
@@ -48,27 +48,25 @@ public class CriaConta {
 }
 ```
 
-O ``.`` é forma que eu uso para navegar entre os atributos da minha classe ``Conta``. 
+O ``.`` é forma que eu uso para navegar entre os atributos da minha classe. 
 
-Quando a gente declara uma variável para criar um objeto, nós não estamos armazenando o objeto em si na variável, nós estamos apontando para ela na memória. O conceito é parecido com o de ponteiro no C. 
+Quando a gente declara uma variável para criar um objeto, nós não estamos armazenando o objeto em si na variável, e sim apenas apontando para ela na memória. O conceito é parecido com o de ponteiro no C. 
 
-Um objeto pode ser chamado de instância, e o processo de criar um objeto pode ser chamado de instanciar. 
-
-Talvez a imagem abaixo não esteja 100% correta, mas vamos usar ela por enquanto.
+Um objeto pode ser chamado de **instância**, e o processo de criar um objeto pode ser chamado de **instanciar**. 
 
 ![Imagem 1](./imgs/java-oo-img-1.png)
 
 ### Valores padrão
 
-Antes, quando declaravámos uma variável e não era atribuido nenhum valor à ela, o eclipse indicava um erro de compilação pois ela não tinha sido inicializada, ou seja, não possui nenhum valor. 
+Antes, quando declarávamos uma variável e não era atribuido nenhum valor à ela, o Eclipse indicava um erro de compilação pois a variável não havia sido inicializada. 
 
-Agora, quando criamos uma classe, podemos atribuir alguns valores padrão para cada atributo. Mesmo se não fizermos isso deliberadamente, quando criarmos um objeto, o Java zera todos os valores dos atributos. Então se printarmos o saldo de um objeto tipo conta que ainda não teve um saldo definido, o valor que receberemos sera ``0``
+Agora, quando criamos uma classe, podemos atribuir alguns valores padrões para cada atributo. Mesmo se não fizermos isso deliberadamente, quando criarmos um objeto, o Java zera todos os valores dos atributos. Então se printarmos o saldo de um objeto tipo conta que ainda não teve um saldo definido, o valor que receberemos será ``0``.
 
 ### Métodos
 
-Quando fazemos a especificação de uma conta, definimos quais são as caracteristicas dela, o que podemos chamar de **atributos** e também precisamos definir qual será o comportamento e como a conta executará as ações desse comportamento. Para isso usamos métodos, que é algo parecido com as funções do C.
+Agora que já definimos quais são os atributos da classe ``Conta``, temos que definir quais serão seus comportamentos e como eles serão executados. 
 
-Vamos definir três ações da conta: deposita, saca e transfere, e depois vamos criar esses métodos dentro da nossa classe Conta.
+Para isso, criaremos três métodos para alterar o saldo: deposita, saca e transfere. 
 
 ```java
 public class Conta {
@@ -98,11 +96,15 @@ public class Conta {
 }
 ```
 
-O método ``deposita`` foi declarado como ``public void``. O ``public`` a gente não sabe o que é ainda, mas o ``void`` indica que não vamos dar nenhum retorno depois do método ser executado. 
+O método ``deposita`` foi declarado como ``public void``. O ``public`` indica que saca será visível para todas as classes, e o ``void`` que não haverá nenhum retorno após a execução. 
 
-É boa prática declarar o nome do método com a primeira letra minúscula e se tiver mais de uma palavra, usar o ``camelCase``. 
+Entre os parênteses declaramos uma variável que vamos precisar receber sempre que esse método for utilizado. Essa variável é chamada de parâmetro. 
 
-Depois declaramos uma variável tipo ``double`` para receber o ``valor`` que será depositado na conta. Dentro das chaves, nós definimos como o método irá executar essa ação. Pelo o que eu entendi, quando trabalhamos com OO, nós sempre fazemos a referência ao objeto que nós queremos mexer, por isso é usado o ``this``. Então se eu crio um objeto e faço uma referência com a variável chamada conta e depois quero depositar 100 reais, o código vai ficar assim: 
+Dentro das chaves definimos como o saldo será alterado. 
+
+Usamos o this para especificar que o saldo que será alterado é do objeto declarado. 
+
+Obs.: é boa prática declarar o nome do método com a primeira letra minúscula, e se houver mais de uma palavra, utilizar o ``camelCase``. 
 
 ```java
 //  Classe 
@@ -113,11 +115,11 @@ conta.deposita(100);
 
 Então, parecido quando vamos mexer em um atributo do objeto, nós invocamos o método com a ``referencia.método``.
 
-Os métodos saca e transfere são parecidos. Dessa vez teremos um retorno, por isso declaramos como public boolean. Definimos os argumentos que eles receberão e depois como farão a ação. 
+Os métodos saca e transfere são parecidos. Dessa vez teremos um retorno, por isso declaramos como ``public boolean``. Definimos os argumentos que eles receberão e depois como farão a ação. 
 
 ### Composição de objetos
 
-Vamos supor que a partir de agora, queremos saber o nome completo, CPF e profissão do titular da conta do bytebank. Nós podemos adicionar esses atributos na nossa classe conta, conforme abaixo: 
+Vamos supor que a partir de agora, queremos saber o nome completo, CPF e profissão do titular da conta do bytebank. Nós podemos adicionar esses atributos na nossa classe Conta, conforme abaixo: 
 
 ```java
 public class Conta {
@@ -141,7 +143,7 @@ public class Cliente {
 }
 ```
 
-Como separamos as informações do cliente em outra classe, e essas dados do cliente são do titular também, nós podemos falar que ``titular`` é do tipo ``Cliente``, assim: 
+Como os atributos da classe ``Cliente`` são informações que queremos do titular, nós podemos fazer uma referência à essa classe indicando que ``titular`` é do tipo ``Cliente``.
 
 ```java
 public class Conta {
@@ -207,13 +209,13 @@ public class Conta {
 }
 ```
 
-A separação de atributos em várias classes é algo normal dentro de Java e provavelmente de outras linguagens OO.
+A separação de atributos em várias classes é, além de normal em liguagens OO, é também uma boa prática. 
 
 ### Encapsulamento
 
-Quando definimos os nossos métodos na classe ``Conta``, nós inserimos uma lógica para que o ``saldo`` nunca fique negativo, mas isso pode ser facilmente contornado quando fazemos acessamos diretamente o atríbuto e colocamos um valor maior do que temos em saldo.  
+Quando definimos os nossos métodos ``saca``, ``transfere`` e ``deposita``, inserimos uma lógica para que o ``saldo`` nunca ficasse negativo, mas isso pode ser facilmente contornado quando acessamos diretamente o atríbuto.   
 
-Para previnir que isso acontece, precisamos encontrar uma forma para os atributos serem acessados somente através dos métodos, e para fazer isso, nós temos que **encapsular** os nosso atributos. E para isso temos a palavra reserva ``private``. Agora a nossa classe conta ficaria assim: 
+Para impedir que isso ocorra, usaremos a palavra chave ``private`` para **encapsular** os nossos atributos. Ficaria assim: 
 
 ```java
 public class Conta {
@@ -226,11 +228,11 @@ public class Conta {
 }
 ```
 
-Dessa forma, para inserir algum valor no saldo, por exemplo, vamos ter que usar obrigatóriamente um dos métodos que a gente criou: saca, deposita e transfere. 
+Dessa forma, para inserir algum valor no saldo, por exemplo, vamos ter que usar obrigatóriamente um dos métodos que a gente criou.
 
 ### Getters e Setters
 
-Agora que encapsulamos tudo, nós precisamos criar os métodos para acessar os atributos ``agência`` e ``conta``. Vamos precisar de dois métodos para cada atributo: uma para definir e outro para verificar os valores. Em Java é usado a nomenclatura **Getter** para verificar o valor e **Setter** para definir o valor e usamos esses termos no nome do método. Assim: 
+Agora que encapsulamos tudo, nós precisamos criar os métodos para acessar os atributos ``agência``, ``conta`` e ``titular``. Em Java é usado a nomenclatura **Getter** para verificar o valor e **Setter** para definir. Esses termos são utilizados nos nomes dos métodos. Assim: 
 
 ```java
 public class Conta {
@@ -253,14 +255,22 @@ public class Conta {
     public void setConta(int conta) {
         this.conta = conta;
     }
+
+    public String getTitular() {
+        return this.titular;
+    }
+
+    public void setTitular(String titular) {
+        this.titular = titular;
+    }
 }
 ```
 
 ### Construtores
 
-Em alguns cenários, nós queremos que um objeto sempre tenha algumas informações. No nosso caso, nós queremos que toda conta, quando instanciada, tenha agência e conta. Para fazer isso, nós vamos criar um construtor na nossa classe Conta. 
+Em alguns cenários, queremos que um objeto sempre tenha algumas informações. No nosso caso, queremos que toda conta tenha agência e conta. Para fazer isso, vamos criar um construtor na classe Conta. 
 
-O Java já nos dá um construtor padrão quando criamos uma classe. Mas a partir do momento que criamos um construtor, aquele construtor padrão não pode ser mais utilizado. 
+O Java já nos dá um construtor padrão quando criamos uma classe. Mas a partir do momento que criamos um, aquele construtor padrão não pode ser mais utilizado. 
 
 ```java
 public class Conta {
@@ -276,13 +286,13 @@ public class Conta {
 }
 ```
 
-Dentro desse construtor, nós colocamos uma validação para que não seja cadastrada nenhuma agência ou conta com número negativo. 
+Colocamos uma validação para que não seja cadastrada nenhuma agência ou conta com número negativo. 
 
-Agora, toda vez que eu for criar um novo objeto Conta, eu vou ser obrigado a informar os parametros ``agencia`` e ``conta``
+Agora, toda vez que um objeto ``Conta`` for criado, será necessário informar uma número para ``agencia`` e ``conta``.
 
 #### Static
 
-Vamos supor que queremos saber quantas contas já foram instanciadas. Para isso, precisamos declarar uma variável que vai fazer essa contagem pra gente. Então vamos declarar ela como um atributo da classe Conta. 
+Se quisermos saber quantas contas já foram instanciadas, precisamos declarar uma variável que vai fazer essa contagem. Então vamos declarar ela como um atributo da classe ``Conta``. 
 
 ```java
 public class Conta {
@@ -293,7 +303,9 @@ public class Conta {
 }
 ```
 
-A palavra chave static transforma a variável total em um atributo da classe e não do objeto. Por exemplo: quando criamos uma conta e definimos um saldo, aquele saldo vale para aquela conta, por isso usamos o this nos métodos de saca, deposita e transfere. Já no caso do total, esse valor não é de um objeto especifico, e sim da classe como um todo. É tipo uma variável global.
+A palavra chave ``static`` transforma a variável ``total`` em um atributo da classe e não do objeto. 
+
+Por exemplo: quando criamos uma conta e definimos um saldo, aquele valor vale para aquela conta, por isso usamos o ``this`` nos métodos de saca, deposita e transfere. Já no caso do total, esse valor não é de um objeto especifico, e sim da classe como um todo. É tipo uma variável global.
 
 Agora, vamos completar o nosso construtor: 
 
