@@ -8,6 +8,12 @@ public class TestaFuncionario {
 		
 		System.out.println(nico.getNome());
 		System.out.println(nico.getBonificacao());
+		
+		GerenteSobrecarga assato = new GerenteSobrecarga();
+		assato.setLogin("aassato");
+		assato.setSenha(1234);
+		System.out.println(assato.autentica("aassato", 8584));
+
 	}
 
 }

@@ -290,6 +290,8 @@ Colocamos uma validação para que não seja cadastrada nenhuma agência ou cont
 
 Agora, toda vez que um objeto ``Conta`` for criado, será necessário informar uma número para ``agencia`` e ``conta``.
 
+É possível também criar mais de um construtor na classe. Se tivermos alguma validção em um dos construtores, podemos usar o ``this()`` para utilizar em outro construtor, sem a necessidade de reescrever.
+
 #### Static
 
 Se quisermos saber quantas contas já foram instanciadas, precisamos declarar uma variável que vai fazer essa contagem. Então vamos declarar ela como um atributo da classe ``Conta``. 
@@ -318,7 +320,3 @@ Agora, vamos completar o nosso construtor:
 			this.conta = conta;
 		} return;
 ```
-
-#### Quando revisar: 
-
-Depois disso dar uma olhada no exemplo de dois construtores no curso.
