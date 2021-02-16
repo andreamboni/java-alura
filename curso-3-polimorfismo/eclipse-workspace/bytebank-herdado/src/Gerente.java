@@ -1,6 +1,11 @@
 public class Gerente extends Funcionario {
 	private int senha;
 	
+	 public double getBonificacao() {
+		 System.out.println("Bonificação do gerente");
+		return super.getBonificacao() + super.getSalario();
+	}
+	
 	public void setSenha(int senha) {
 		this.senha = senha; 
 	}
@@ -13,8 +18,5 @@ public class Gerente extends Funcionario {
 		}
 	}
 	
-	 public double getBonificacao() {
-		return super.getBonificacao();
-	}
 	
 }

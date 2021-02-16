@@ -159,3 +159,65 @@ public boolean autentica(String login, int senha) {
 	
 }
 ```
+
+### Polimorfismo
+
+Com o polimorfismo nós conseguimos usar referências mais genéricas apontarem para objetos específicos. Agora queremos saber quanto pagamos de bonificação aos funcionários, e para isso, criaremos uma classe chamada ``ControleBonificacao``.
+
+```java
+public class ControleBonificacao {
+	private double soma;
+
+	public void registro(Funcionario f) {
+		double boni = f.getBonificacao();
+		this.soma += boni;
+	}
+
+	public double getSoma() {
+		return this.soma;
+	}
+}
+```
+
+Também vamos criar mais um tipo de funcionário chamado ``Designer``.
+
+```java
+public class Designer extends Funcionario {
+	public double getBonificacao() {
+		System.out.println("Bonificação designer");
+		return 200;
+	}
+}
+```
+
+Agora vamos criar outra classe chamada ``TestaReferencia`` para começar a contabilizar as bonificações. 
+
+
+```java
+public class TestaReferencia {
+	public static void main(String[] args) {
+		Gerente g1 = new Gerente();
+		g1.setNome("Marcos");
+		g1.setSalario(5000.0);
+		
+		Funcionario f = new Funcionario();
+		f.setSalario(2000.00);
+		
+		Designer d = new Designer();
+		d.setSalario(3500.0);
+		
+		ControleBonificacao controle = new ControleBonificacao();
+		controle.registro(g1);
+		controle.registro(f);
+		controle.registro(d);
+		
+		System.out.println(controle.getSoma());
+	}
+}
+```
+
+Nessa classe declaramos três funcionários: ``g1 (Gerente)``, ``f (Funcionário)`` e ``d (Designer)``, e setamos o salário para cada um deles. Depois de definir os salários, criamos um objeto do tipo ``ControleBonificacao`` para fazer a soma dos valores, chamamos o método ``registro`` e passamos como argumento os funcionários. 
+
+Após tudo isso, chamamos o ``getSoma`` dentro de um ``sysout``, e o resultado foi ``5550.0``, que é a soma de todas as bonificações. 
+
+A vantagem e o objetivo do polimorfismo é usar uma referência genérica para apontar para um objeto específico. O método ``registro``, por exemplo, usa um argumento do tipo ``Funcionario``, que é a nossa classe mãe. Como todo objeto instanciado dentro de ``TestaReferencia`` é um funcionário, é possível fazer a soma de todas as bonificações. E isso ocorre porque o Java, nesses casos, sempre olha para o objeto e não para o tipo. 
