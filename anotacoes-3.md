@@ -77,7 +77,7 @@ Super class, classe mãe, classe pai ou base class, é o nome que podemos dar pa
 
 ### Protected
 
-Mesmo extendendo a classe ``Funcionario`` com a classe ``Gerente``, nós não conseguimos acessar o atributo ``saldo`` diretamente e consequentemente existe um erro no nosso método ``getBonificacao``. Temos duas opções para resolver esse problema: 
+Mesmo estendendo a classe ``Funcionario`` com a classe ``Gerente``, nós não conseguimos acessar o atributo ``saldo`` diretamente e consequentemente existe um erro no nosso método ``getBonificacao``. Temos duas opções para resolver esse problema: 
 
 Uma das opções é alterar a visibilidade do atributo ``saldo`` para ``protected``. O ``protected`` dá visibilidade para a própria classe e suas filhas. No nosso caso, visibilidade para ``Funcionario`` e ``Gerente``. 
 
@@ -221,3 +221,146 @@ Nessa classe declaramos três funcionários: ``g1 (Gerente)``, ``f (Funcionário
 Após tudo isso, chamamos o ``getSoma`` dentro de um ``sysout``, e o resultado foi ``5550.0``, que é a soma de todas as bonificações. 
 
 A vantagem e o objetivo do polimorfismo é usar uma referência genérica para apontar para um objeto específico. O método ``registro``, por exemplo, usa um argumento do tipo ``Funcionario``, que é a nossa classe mãe. Como todo objeto instanciado dentro de ``TestaReferencia`` é um funcionário, é possível fazer a soma de todas as bonificações. E isso ocorre porque o Java, nesses casos, sempre olha para o objeto e não para o tipo. 
+
+### Herança e construtores
+
+Voltamos a usar as classes ``Conta`` e ``Cliente`` que tinhamos criado no curso com o Paulo. 
+
+**Classe Conta**
+
+```java
+public class Conta {
+	private double saldo; 
+	private int agencia;
+	private int conta;
+	private Cliente titular; 
+	private static int total;
+
+
+	// Construtor
+	public Conta(int agencia, int conta) {
+		Conta.total++;
+		System.out.println("O total de contas é " + Conta.total);
+		if(agencia >= 0 && conta >= 0) {
+			this.agencia = agencia;
+			this.conta = conta;
+		} return;
+	}
+	
+	// Método deposita, saca e transfere
+
+	// Getters e setters
+}
+```
+
+**Classe Cliente**
+
+```java
+public class Cliente {
+	private String nome;
+	private String cpf;
+	private String profissao;
+	
+	// Getters e setters	
+}
+```
+
+Queremos criar mais duas classes agora: ``ContaCorrente`` e ``ContaPoupanca``. Ambas serão filhas da classe ``Conta``. 
+
+Quando criamos essas classes e usamos o ``extends Conta``, o Eclipse acusa um erro de compilação, informando que o construtor padrão da super class não foi definido. 
+
+Durante o curso com o Paulo, criamos um construtor específico para a classe ``Conta`` para que os atributos ``agencia`` e ``conta`` fossem definidos todas vez que um objeto tipo ``Conta`` fosse instanciado. E quando criamos um construtor, o padrão que o Java disponibiliza pra gente não pode ser mais utilizado. 
+
+Quando estendemos uma classe, a classe filha herda somente os **atributos** e **métodos**, mas mesmo assim o Java tenta acessar o construtor padrão da super class. Como não estamos mais usando esse construtor padrão, podemos resolver esse problema de duas formas: 
+
+**Opção 1:**
+
+Podemos criar um construtor padrão na classe ``Conta``. Com essa opção, nós podemos chamar esse padrão na classe filha ou simplesmente não chamar nada. 
+
+```java
+public class Conta {
+	private double saldo; 
+	private int agencia;
+	private int conta;
+	private Cliente titular; 
+	private static int total;
+
+	// Construtor padrão
+	public Conta(){
+		// Comportamento
+	}
+
+	// Construtor específico
+	public Conta(int agencia, int conta) {
+		Conta.total++;
+		System.out.println("O total de contas é " + Conta.total);
+		if(agencia >= 0 && conta >= 0) {
+			this.agencia = agencia;
+			this.conta = conta;
+		} return;
+	}
+	
+	// Método deposita, saca e transfere
+
+	// Getters e setters
+}
+```
+
+**Criando o construtor padrão na classe filha**
+
+```java
+public class ContaCorrente extends Conta {
+	
+	public ContaCorrente() {
+		super();
+	}
+
+}
+```
+
+**Não criando construtor**
+
+```java
+public class ContaCorrente extends Conta{
+	
+
+}
+```
+
+**Opção 2:**
+
+Podemos não criar um construtor padrão em ``Conta``, e chamar o construtor específico dentro da classe filha.
+
+```java
+public class Conta {
+	private double saldo; 
+	private int agencia;
+	private int conta;
+	private Cliente titular; 
+	private static int total;
+
+	// Construtor específico
+	public Conta(int agencia, int conta) {
+		Conta.total++;
+		System.out.println("O total de contas é " + Conta.total);
+		if(agencia >= 0 && conta >= 0) {
+			this.agencia = agencia;
+			this.conta = conta;
+		} return;
+	}
+	
+	// Método deposita, saca e transfere
+
+	// Getters e setters
+}
+```
+
+```java
+public class ContaCorrente extends Conta{
+	
+	public ContaCorrente(int agencia, int conta) {
+		super(agencia, conta);
+	}
+
+}
+```
