@@ -4,7 +4,7 @@ public class TestaReferencia {
 		g1.setNome("Marcos");
 		g1.setSalario(5000.0);
 		
-		Funcionario f = new Funcionario();
+		Funcionario f = new Designer();
 		f.setSalario(2000.00);
 		
 		Designer d = new Designer();

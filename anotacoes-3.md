@@ -364,3 +364,41 @@ public class ContaCorrente extends Conta{
 
 }
 ```
+
+### Classes Abstratas
+
+Quando temos uma classe que ele não deve ser necessariamente instanciada, mas somente servir como base para suas filhas, podemos definir essa clase como ``abstract``.
+
+Podemos usar como exemplo a nossa classe ``Funcionario`` no projeto **bytebank-herdado**. 
+
+Dificilmente temos uma pessoa dentro de uma empresa que ela só é um funcionário, normalmente ela tem uma função, é uma gerente, designer, programador e etc. Então, como uma pessoa sempre tem um papel dentro da empresa, a gente precisa somente da ideia ``Funcionario``, com os seus atributos e métodos. Não queremos que essa classe seja instanciada, visto que já temos classes específicas para cada tipo de colaborador. 
+
+Para transformar uma classe em abstrata, inserimos a palavra chave abstract. Assim:
+
+```java
+public abstract class Funcionario {
+ // Atributos
+ // Métodos
+}
+```
+
+Então, uma classe abstrada nada mais é do que uma classe normal, mas que não pode ser instanciada. 
+
+### Métodos abstrados
+
+Quando queremos somente a ideia de um método, para depois fazer uma implementação para cada cenário específico, nós também podemos criar um método abstrato. Ficaria assim: 
+
+```java
+public abstract class Funcionario {
+	// Atributos
+	
+	// Método abstrato
+	public abstract double getBonificacao();
+	
+	// Métodos
+}
+
+```
+O método abstrato precisa estar dentro de uma classe abstrata e não precisa de implentação, ou seja, do corpo entre chaves. 
+
+Obs.: Assinatura: (visibilidade, retorno, nome do método e parâmetros).

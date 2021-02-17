@@ -28,7 +28,7 @@ public class GerenteSobrecarga extends Funcionario {
 	}
 	
 	 public double getBonificacao() {
-		return super.getBonificacao();
+		return super.getSalario();
 	}
 	
 }

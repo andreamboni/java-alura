@@ -1,13 +1,9 @@
-public class Conta {
+public abstract class Conta {
 	private double saldo; 
 	private int agencia;
 	private int conta;
 	private Cliente titular; 
 	private static int total;
-	
-	public Conta() {
-		
-	}
 	
 	public Conta(int agencia, int conta) {
 		Conta.total++;
