@@ -402,3 +402,5 @@ public abstract class Funcionario {
 O método abstrato precisa estar dentro de uma classe abstrata e não precisa de implentação, ou seja, do corpo entre chaves. 
 
 Obs.: Assinatura: (visibilidade, retorno, nome do método e parâmetros).
+
+### TODO: resumo sobre mais de uma classe abstrata e sobre interface 
