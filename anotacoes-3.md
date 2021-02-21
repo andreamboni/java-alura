@@ -404,3 +404,107 @@ O método abstrato precisa estar dentro de uma classe abstrata e não precisa de
 Obs.: Assinatura: (visibilidade, retorno, nome do método e parâmetros).
 
 ### TODO: resumo sobre mais de uma classe abstrata e sobre interface 
+
+### Aumentando a hierarquia com classes abstratas 
+
+É possível aumentar a hierarquia criando uma segunda classe abstrata que já estende outra classe abstrata. 
+
+Isso é útil para quando queremos dar funções iguais para alguns funcionários e para outros não. Vamos supor que queremos que somente o Gerente e o Administrador tenham uma senha e a autenticação dessa senha e o Designer não. 
+
+Classe abstrata que estende Funcionario e possui senha e um método abstrato chamado autentica.
+
+```java
+public abstract class Autenticavel extends Funcionario {
+	private int senha; 
+	public void setSenha(int senha);
+	public boolean autentica(int senha);
+}
+```
+
+Classe gerente estendendo Autenticavel. Aqui podemos dizer que Gerente é Autenticavel e Funcionario.
+
+```java
+public class Gerente extends Autenticavel {
+	private int senha;
+	
+	 @Override
+	 public double getBonificacao() {
+		 System.out.println("Bonificação do gerente");
+		return super.getSalario();
+	}
+	@Override
+	public void setSenha(int senha) {
+		this.senha = senha;
+		
+	}
+	@Override
+	public boolean autentica(int senha) {
+		if(this.senha == senha) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
+```
+Classe Designer que estende diretamente Funcionario. 
+
+```java
+public class Designer extends Funcionario {
+	public double getBonificacao() {
+		System.out.println("Bonificação designer");
+		return 200;
+	}
+}
+```
+
+Temos duas classes abstratas sendo estendidas: ``Funcionario`` sendo estendido por ``Autenticavel`` e ``Designer`` e ``Gerente`` estendendo ``Autenticavel`` e consequentemente ``Funcionario`` também. 
+
+Abaixo temos uma ilustração do que está ocorrendo.
+
+![Imagem 1](./imgs/java-polimorfismo-img-2.png)
+
+
+### Interface 
+
+Também podemos usar interfaces para utilizar implementar métodos com comportamentos específicos. A vantagem da interface é que podemos assinar mais de uma dentro do objeto. Ficaria assim: 
+
+Agora Autenticavel virou uma interface. 
+
+public abstract interface Autenticavel  {
+	public void setSenha(int senha);
+	public boolean autentica(int senha);
+
+}
+
+E gerente está estendendo Funcionario e assinando Autenticavel
+
+```java
+public class Gerente extends Funcionario implements Autenticavel {
+	private int senha;
+	
+	 @Override
+	 public double getBonificacao() {
+		 System.out.println("Bonificação do gerente");
+		return super.getSalario();
+	}
+	@Override
+	public void setSenha(int senha) {
+		this.senha = senha;
+		
+	}
+	@Override
+	public boolean autentica(int senha) {
+		if(this.senha == senha) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
+```
+
+
+Interfaces sempre são abstratos, então não podem ser instanciados e também só podem ter métodos abstratos e públicos. Interfaces não tem atributos. Elas são usadas para definir regras que queremos implementar em outras classes. 
+
+A classe que assina a interface tem a obrigação de implementar o método (inserir o comportamento dele dentro do corpo/entre chaves).

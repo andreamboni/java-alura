@@ -119,7 +119,7 @@ Os métodos saca e transfere são parecidos. Dessa vez teremos um retorno, por i
 
 ### Composição de objetos
 
-Vamos supor que a partir de agora, queremos saber o nome completo, CPF e profissão do titular da conta do bytebank. Nós podemos adicionar esses atributos na nossa classe Conta, conforme abaixo: 
+Vamos supor que a partir de agora, queremos saber o nome completo, CPF e profissão do titular da conta do bytebank. Nós podemos adicionar esses atributos na nossa classe ``Conta``, conforme abaixo: 
 
 ```java
 public class Conta {
@@ -292,7 +292,7 @@ Agora, toda vez que um objeto ``Conta`` for criado, será necessário informar u
 
 É possível também criar mais de um construtor na classe. Se tivermos alguma validção em um dos construtores, podemos usar o ``this()`` para utilizar em outro construtor, sem a necessidade de reescrever.
 
-#### Static
+### Static
 
 Se quisermos saber quantas contas já foram instanciadas, precisamos declarar uma variável que vai fazer essa contagem. Então vamos declarar ela como um atributo da classe ``Conta``. 
 
@@ -312,11 +312,11 @@ Por exemplo: quando criamos uma conta e definimos um saldo, aquele valor vale pa
 Agora, vamos completar o nosso construtor: 
 
 ```java
-	public Conta(int agencia, int conta) {
-		Conta.total++;
-		System.out.println("O total de contas é " + Conta.total);
-		if(agencia >= 0 && conta >= 0) {
-			this.agencia = agencia;
-			this.conta = conta;
-		} return;
+public Conta(int agencia, int conta) {
+	Conta.total++;
+	System.out.println("O total de contas é " + Conta.total);
+	if(agencia >= 0 && conta >= 0) {
+		this.agencia = agencia;
+		this.conta = conta;
+	} return;
 ```
