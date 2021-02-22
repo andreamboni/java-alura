@@ -462,7 +462,7 @@ Temos duas classes abstratas sendo estendidas: ``Funcionario`` sendo estendido p
 
 Abaixo temos uma ilustração do que está ocorrendo.
 
-![Imagem 1](./imgs/java-polimorfismo-img-2.png)
+![Imagem 2](./imgs/java-polimorfismo-img-2.png)
 
 
 ### Interface 
@@ -504,7 +504,16 @@ public class Gerente extends Funcionario implements Autenticavel {
 }
 ```
 
-
 Interfaces sempre são abstratos, então não podem ser instanciados e também só podem ter métodos abstratos e públicos. Interfaces não tem atributos. Elas são usadas para definir regras que queremos implementar em outras classes. 
 
 A classe que assina a interface tem a obrigação de implementar o método (inserir o comportamento dele dentro do corpo/entre chaves).
+
+### Herança, interface e composição
+
+Quando usamos herança, nós precisamos usar necessariamente o polimorfismo e a reutilização de código. Mas e se só quisermos usar o polimorfismo ou a reutilização do código? 
+
+Nós conseguimos usar o polimorfismo através das interfaces e a reutilização do código com a composição. 
+
+
+
+![Imagem 3](./imgs/java-polimorfismo-img-3.png)
