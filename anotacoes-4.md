@@ -129,6 +129,8 @@ Ao executar, recebemos a seguinte mensagem. Note que a pilha é exibida no erro.
 
 Isso ocorre porque quando a exceção ocorre, o compilador vai voltando no código para encontrar uma tratativa para esse erro. Então nesse caso ele voltou no ``metodo2`` mas não encontrou uma tratativa, depois no ``metodo1`` e por fim, no metodo ``main``. Como não existe nada para ajudar com essa exceção, o sistema é encerrado. 
 
+Como o compilador começa ir atrás de várias informações nos métodos anteriores, o fluxo "natural" do programa é quebrado.
+
 ### try e catch
 
 Podemos escrever o seguinte código para tratar uma exceção:
@@ -267,3 +269,30 @@ public static void main(String[] args) {
     }
 }
 ```
+
+### Lançando exceções
+
+Se for necessário lançar uma exceção diretamente na pilha de execução, eu posso instanciar a exceção e depois lançá-la com o ``throw``.
+
+**Opção 1:** usar uma referência para guardar a classe da exceção, nesse caso a ``ArithmeticException``.
+
+```java
+	private static void metodo2() {
+		System.out.println("Ini do metodo2");
+		
+		ArithmeticException execption = new ArithmeticException("deu errado"); 
+		throw execption;
+	}
+```
+
+**Opção 2:** podemos lançar a exceção direto no instanciamento.
+
+```java
+	private static void metodo2() {
+		System.out.println("Ini do metodo2");
+		
+		throw new ArithmeticException("deu errado"); 
+	}
+```
+
+Esse comando funciona somente para exceções. Se quisermos lançar um objeto qualquer, por exemplo uma ``Conta``, o ``throw`` não irá funcionar. 

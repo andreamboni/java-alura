@@ -1,5 +1,5 @@
-public class Fluxo {
-
+public class FluxoComTratamento {
+	
 	public static void main(String[] args) {
 		System.out.println("Ini do main");
 	    try {
@@ -20,9 +20,10 @@ public class Fluxo {
 
 	private static void metodo2() {
 		System.out.println("Ini do metodo2");
-		
-		ArithmeticException execption = new ArithmeticException("deu errado"); 
-		throw execption;
-		//System.out.println("Fim do metodo2");
+		for (int i = 1; i <= 5; i++) {
+			System.out.println(i);
+			int a = 10 / 0;
+		}
+		System.out.println("Fim do metodo2");
 	}
 }
