@@ -296,3 +296,92 @@ Se for necessário lançar uma exceção diretamente na pilha de execução, eu 
 ```
 
 Esse comando funciona somente para exceções. Se quisermos lançar um objeto qualquer, por exemplo uma ``Conta``, o ``throw`` não irá funcionar. 
+
+### Criando uma exceção
+
+Quando criamos a referência ``ex`` do tipo ``ArithmeticException``, vimos que é possível utilizar alguns métodos, como ``printStackTrace`` ou ``getMessage``.
+
+Se entrarmos nas definições de ``ArithmeticException``, veremos que ela estende uma classe chamada ``RuntimeException``, que por sua vez estende a classe ``Exception`` e que, por último, estende ``Throwable``.
+
+Para criar uma exceção, teremos que estender ``RuntimeException``, para que a nossa exceção herde tudo o que tem no caminho até o ``Throwable`` (que eu confesso que não sei o que é).
+
+**Exemplo de exceção:** 
+
+```java
+public class MinhaExcecao extends RuntimeException {
+	public MinhaExcecao(String msg) {
+		super(msg);
+	}
+}
+```
+
+Aqui estamos usando a herança de ``RuntimeException`` e criando um construtor que recebe uma ``string`` e que chama a mensagem na ``super class`` (classe acima ou classe mãe). No final do caminho desse super, vamos parar em Throwable, que tem a implementação original. 
+
+**Implementação original massage:**
+
+```java
+    public Throwable(String message) {
+        fillInStackTrace();
+        detailMessage = message;
+    }
+```
+
+Podemos usar a nossa exceção classe ``Fluxo``.
+
+```java
+	private static void metodo2() {
+		System.out.println("Ini do metodo2");
+		
+		throw new MinhaExcecao("deu muito errado"); 
+	}
+```
+
+### Sobre a hierarquia das classes de exceção
+
+Tinhamos comentado acima que existe uma hierarquia nas classes de exceções, que vai de ``RuntimeException`` até ``Throwable``. Existe também um outro lado de ``Throwable`` que são as classes direcionas para os desenvolvedores da máquina virtual. Teoricamente, pode ser representado conforme abaixo: 
+
+![Imagem 14](./imgs/java-excecoes-img-14.png)
+
+### Checked e Unchecked
+
+As exceções são separadas em duas categorias: verificadas e não verificadas (checked e unchecked, respectivamente). As verificadas precisam de uma confirmação na assinatura do método para que o compilador permita a compilação. No caso das não verificadas, não existe a necessidade.
+
+A garantia que temos que inserir na assinatura do método é ``throws NomeDaExcecao``. Por exemplo: 
+
+**Definição da exceção:**
+
+```java
+public class MinhaExcecao extends Exception {
+	public MinhaExcecao(String msg) {
+		super(msg);
+	}
+}
+```
+
+**Exemplificação da garantia na assinatura:** 
+
+```java
+	private static void metodo2() throws MinhaExcecao{
+		System.out.println("Ini do metodo2");
+		
+		throw new MinhaExcecao("deu muito errado"); 
+	}
+```
+
+Note que na definição da exceção nós estendemos diretamente de ``Exception``. Então, quando a classe não estende ``RuntimeException``, ela precisa de uma verificação. 
+
+Podemos também usar o ``try`` e ``catch`` para fazer a verificação.
+
+```java
+	private static void metodo2(){
+		System.out.println("Ini do metodo2");
+		
+		try {
+			throw new MinhaExcecao("deu muito errado"); 
+		} catch (MinhaExcecao ex) {
+			//Alguma coisa
+		}
+	}
+```
+
+Não existe diferença na excecução em si quando uma exceção é verificada ou não. 
