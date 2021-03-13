@@ -385,3 +385,15 @@ Podemos também usar o ``try`` e ``catch`` para fazer a verificação.
 ```
 
 Não existe diferença na excecução em si quando uma exceção é verificada ou não. 
+
+### Catch polimórfico 
+
+Podemos fazer um catch que atende todas as exceções. Assim:
+
+```java
+public static void main(String[] args) {
+    System.out.println("Ini do main");
+    try {
+        metodo1();
+    } catch(Exception ex) {}
+```
