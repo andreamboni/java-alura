@@ -1,4 +1,6 @@
-# Curso 4 (De 04/03/2021 a 12/03/2021)
+# Curso 4 (De 04/03/2021 a 13/03/2021)
+
+## Exceções
 
 ### Pilha de execução
 
@@ -386,7 +388,7 @@ Podemos também usar o ``try`` e ``catch`` para fazer a verificação.
 
 Não existe diferença na excecução em si quando uma exceção é verificada ou não. 
 
-### Catch polimórfico 
+### Catch genérico ou catch polimórfico 
 
 Podemos fazer um catch que atende todas as exceções. Assim:
 
@@ -397,3 +399,93 @@ public static void main(String[] args) {
         metodo1();
     } catch(Exception ex) {}
 ```
+
+A opção acima não é uma boa prática. 
+
+### Finally
+
+Quando precisamos chamar algum método que fecha uma conexão com um banco de dados, podemos usar o bloco ``finally`` no ``try`` e ``catch``. Segue exemplo: 
+
+```java
+public class TesteConexao {
+
+	public static void main(String[] args) {
+		Conexao con = null;
+		try  {
+			con = new Conexao();
+			con.leDados();
+		} catch(IllegalStateException ex) {
+			System.out.println("Deu erro na conexão");
+		} finally {
+			con.fecha();
+		}
+	}
+}
+```
+
+Isso é muito usado quando estamos lidando com alguma conexão, local ou não, visto que é uma boa prática sempre fechar a conexão que você abre. 
+
+### Algumas regras do bloco try, catch e finally
+
+Sempre que vamos usar esse bloco, o ``try`` precisa vir acompanhado de um ``catch`` ou de um ``finally``.
+
+### try-with-resources
+
+Podemos escrever o código do último exmplo de uma forma melhor, usando o ``try-with-resources``. Para isso precisamos implementar o ``AutoCloseable`` na classe onde os métodos são declarados. Nesse nosso exemplo, será a classe conexão: 
+
+```java 
+public class Conexao implements AutoCloseable {
+	public Conexao() {
+		System.out.println("Abrindo conexão");
+		throw new IllegalStateException();
+	}
+	
+	public void leDados() {
+		System.out.println("Recebendo dados");
+		throw new IllegalStateException();
+	}
+
+	public void fecha() {
+		System.out.println("Fechando conexão");
+	}
+}
+```
+
+Quando implementamos ``AutoCloseable``, podemos sobrescrever o método ``close``. Como ele já existe, vamos usar ele e apagar o método ``fecha``.
+
+```java
+public class Conexao implements AutoCloseable {
+	public Conexao() {
+		System.out.println("Abrindo conexão");
+		throw new IllegalStateException();
+	}
+	
+	public void leDados() {
+		System.out.println("Recebendo dados");
+		throw new IllegalStateException();
+	}
+
+	@Override
+	public void close() {
+		System.out.println("Fechando conexão");
+	}
+}
+```
+
+Agora podemos usar o ``try-with-resources`` na nossa classe TesteConexao. Vai ficar assim: 
+
+```java
+public class TesteConexao {
+	
+	public static void main(String[] args) {
+		
+		try (Conexao conexao = new Conexao()) {
+			conexao.leDados();
+		} catch (IllegalStateException ex) {
+			System.out.println("Deu erro na conexão");
+		}		
+	}
+}
+```
+
+Quando usamos o ``try-with-resources``, o ``finally`` automaticamente já implementado. Então não precisamos abrir esse bloco. Se houver a necessidade, podemos criar o ``catch``, igual no caso acima. 
