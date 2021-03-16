@@ -183,3 +183,15 @@ public class TestaConta {
 ```
 
 Para isso, podemos usar o atalho ``Ctrl + Shift + O`` no Eclipse. 
+
+### Revisitando modificadores de acesso
+
+Agora que sabemos os que são pacotes, podemos entender por completo os modificadores de acesso.
+
+**Public:** pode ser visto tanto dentro quanto fora do pacote. Modificador mais permissivo.
+
+**Protected:** pode ser visto dentro do pacote, e fora somente para as classes filhas. Segundo modificador mais permissivo.
+
+**Package private ou default:** visível somente dentro do pacote. Ele só é utilizado quando não utilizamos nenhum modificador de aceso. Terceiro modificador mais permissivo. 
+
+**Private:** visível somente dentro da clase. Modificador menos permissivo. 
