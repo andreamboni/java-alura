@@ -6,7 +6,7 @@
 
 Pacotes ou packages, nada mais são do que pastas que usamos para organizar o nosso projeto. Quando fazemos essa separação, precisamos indicar na nossa classe o pacote que ele faz parte. Por exemplo: 
 
-![Imagem 1](./imgs/java-excecoes-img-1.png)
+![Imagem 1](./imgs/java-javalang-img-1.png)
 
 Separamos o nosso código em duas pastas: **modelo** e **testes**. Nas classes do pacote modelo, usamos a palavra chave ``package`` seguido do nome da pasta.
 
@@ -73,7 +73,7 @@ O nome desse tipo de referência é **Full Qualified Name** ou **FQN**
 
 Para criar um pacote único no mundo para que não ocorra nenhum conflito durante a comunicação entre sistemas, usaremos a URL do site da empresa. Então, se o site da nossa empresa for bytebank.com.br, vamos criar primeiro uma pasta chamada ``br``, depois ``com``, depois ``bytebank``, um com o nome do ``projeto`` e depois as divisões que queremos fazer. Vai ficar assim: 
 
-![Imagem 1](./imgs/java-excecoes-img-1.png)
+![Imagem 2](./imgs/java-javalang-img-2.png)
 
 Agora vamos atualizar isso nas nossas classes.
 
@@ -131,7 +131,6 @@ public class TestaConta {
 	}
 }
 ```
-
 ### Importando pacotes
 
 Para não ter que escrever essa tripa toda para chamar uma classe, podemos usar a importação logo após a declaração do pacote. Assim: 
@@ -195,3 +194,23 @@ Agora que sabemos os que são pacotes, podemos entender por completo os modifica
 **Package private ou default:** visível somente dentro do pacote. Ele só é utilizado quando não utilizamos nenhum modificador de aceso. Terceiro modificador mais permissivo. 
 
 **Private:** visível somente dentro da clase. Modificador menos permissivo. 
+
+### Javadoc
+
+Dentro do Java existe uma forma de criar comentários para servir de documentação das classes. Para isso usamos ``/**``` e tag para indicar versão, autor e etc. (@version, @author respectivamente) A partir desses comentários, conseguimos criar um arquivo para documentação. É possível fazer isso direto no Eclipse. 
+
+Essa documentação trata somente dos membros públicos da classe.
+
+### Biblioteca JAR
+
+Podemos exportar os nossos projetos em um arquivo compactado, mas com a extensão JAR (Java Archive). Depois, se quisermos utilizar, podemos criar uma pasta e importar esse arquivo. Normalmente o nome dessa pasta é **libs**, e assim, que importarmos o arquivos, podemos adicionar ao nosso build path para importar no nosso novo projeto. 
+
+![Imagem 3](./imgs/java-javalang-img-3.png)
+
+O arquivo JAR é somente o código compilado, não o código fonte. 
+
+Também é possível criar um JAR executável. 
+
+### Um pouco sobre Maven
+
+O Maven é um organizador de código compilado, código fonte e documentação, parecido com npm. 
