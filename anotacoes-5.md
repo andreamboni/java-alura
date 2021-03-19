@@ -214,3 +214,57 @@ Também é possível criar um JAR executável.
 ### Um pouco sobre Maven
 
 O Maven é um organizador de código compilado, código fonte e documentação, parecido com npm. 
+
+### Pacote java.lang
+
+O pacote java.lang é padrão para os projetos Java, por isso não existe a necessidade de importá-las.
+
+Dentro de java.lang estão as classes String, System, Exception e etc.
+
+### String
+
+Como sabemos, String não é um tipo primitivo do Java. Na realidade String é uma classe, que podemos instanciar do jeito "padrão".
+
+```java
+package br.com.bytebank.banco.teste;
+
+public class TesteString {
+	public static void main(String[] args) {
+		String outro = new String("Alura");
+	}
+}
+```
+
+Por mais que não esteja errado, não é boa prática instanciar o objeto desse jeito.
+
+```java
+package br.com.bytebank.banco.teste;
+
+public class TesteString {
+	public static void main(String[] args) {
+		String nome = "Alura"; // Object literal
+	}
+}
+```
+
+O jeito "correto" de declarar é como acima, como se fosse um tipo primtivo. 
+
+Dentro da classe String existem vários métodos, como replace ou toLowerCase, que podemos usar através do objeto que criamos. Uma coisa importante de se ter em mente é que uma String é imutável, então toda vez que vamos usar um dos métodos acima, temos que instanciar um novo objetivo. Assim: 
+
+```java
+package br.com.bytebank.banco.teste;
+
+public class TesteString {
+	public static void main(String[] args) {
+		String nome = "Alura"; // Object literal		
+		String outro = nome.toLowerCase();
+		
+		System.out.println(nome);
+		System.out.println(outro);	
+	}
+}
+```
+
+### Sobreposição
+
+Sobreposição é quando escrevemos um método com alteração no tipo ou quantidade de parâmetros
