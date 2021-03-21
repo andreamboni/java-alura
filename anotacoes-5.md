@@ -1,4 +1,4 @@
-# Curso 5 (De 15/03/2021 a 19/03/2021)
+# Curso 5 (De 15/03/2021 a 21/03/2021)
 
 ## Java e java.lang
 
@@ -265,6 +265,12 @@ public class TesteString {
 }
 ```
 
-### Sobreposição
+### Sobrecarga vc sobreescrita
 
-Sobreposição é quando escrevemos um método com alteração no tipo ou quantidade de parâmetros
+Sobrecarga (Overload) é criamos uma nova versão de um método, mas com parâmetros diferentes. Já a sobreescrita (Override) é relacionado com a herança, que ao estender uma classe, precisamos sobrescrever o método com a mesma assinatura.
+
+### Classe Object 
+
+A classe ``Object`` é a mãe de todas as outras classes. Ela é utilizada para dar a possibilidade de imprimir qualquer tipo de objeto, pois é uma forma mais genérica. Então qualquer objetivo pode ser referenciado pela classe ``Object``.
+
+A gente consegue reescrever métodos que estão em object em outras classes.

@@ -14,6 +14,5 @@ public class TestaConta {
 		cc.transfere(10.0, cp);
 		System.out.println(cc.getSaldo());
 		System.out.println(cp.getSaldo());
-		
 	}
 }
