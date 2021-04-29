@@ -31,3 +31,20 @@ No código acima está a declaração do ``Array`` e como inicializamos ela. Not
 Quando declaramos um ``array``, temos que informar o tipo. (``int``, ``double`` e etc.).
 
 Se tentarmos inicializar uma posição que não deveria existir dentro do ``array``, por exemplo, uma sexta posição, tomariamos uma exceção. 
+
+### Type casting 
+
+Quando estamos instaciando um objeto com uma referência muito genérica, para acessar algum método de uma classe específica, precisamos fazer o **type casting**.
+
+Podemos usar o código abaixo como exemplo:
+
+```java
+public static void main(String[] args) {
+	double valor = 3.56;
+	int numero = (int) valor;
+}
+```
+
+### String[] args
+
+O String[] args, pelo o que eu entendi, é uma variável do tipo string, que podemos usar no momento da execução. Se chamarmos a jvm pelo terminal e passar argumentos, eles serão exibidos. 
