@@ -48,3 +48,25 @@ public static void main(String[] args) {
 ### String[] args
 
 O String[] args, pelo o que eu entendi, é uma variável do tipo string, que podemos usar no momento da execução. Se chamarmos a jvm pelo terminal e passar argumentos, eles serão exibidos. 
+
+### Desvantagens do Array
+
+Não é possível quantas posições já foram ocupadas. Conseguimos saber somente quantas tem.
+
+Não conseguimos mudar o tamanho do array de forma dinâmica. Uma vez que o array é criado com dez posições, sempre terá dez posições. 
+
+### ArrayList
+
+O ArrayList é um recurso do pacote java.util para utilizar o Array de uma mais "orientada a objetos". Ela já vem com vários métodos como ``add``, ``remove``, ``get``, ``size`` e etc.
+
+O limite de elementor que o ArrayList pode guardar é o limite da memória da **JVM**.
+
+### Generics
+
+Para evitar uma possível confusão com a tipagem dos arrays, é possível usar generics para especificar o tipo do ArrayList que você está criando. Vamos supor que você quer criar um Array de contas e outro que só recebe strings. Teremos que fazer da seguinte forma, respectivamente: ``ArrayList<Conta> conta = new ArrayList<Conta>()`` e ``ArrayList<String> string = new ArrayList<String>()``.
+
+Esse recurso evita que seja salvo uma conta dentro de um array de strings ou vice versa. Assim você não precisa ficar fazendo os castings. 
+
+O tipo depois da virgula não é necessário, pode ficar assim: ``ArrayList<String> string = new ArrayList<>()``
+
+Também é possível fazer um ArrayList com o tamanho que eu preciso ou indicando outro Array: ``ArrayList lista = new ArrayList(26);`` e ``ArrayList nova = new ArrayList(lista);`` respectivamente. 

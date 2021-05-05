@@ -6,7 +6,7 @@ public class SistemaInterno {
 		if(autenticou) {
 			System.out.println("Pode entrar no sistema");
 		} else {
-			System.out.println("Não pode entrar no sistema");
+			System.out.println("Nao pode entrar no sistema");
 		}
 	}
 }
