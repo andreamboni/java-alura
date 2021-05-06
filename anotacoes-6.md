@@ -70,3 +70,17 @@ Esse recurso evita que seja salvo uma conta dentro de um array de strings ou vic
 O tipo depois da virgula não é necessário, pode ficar assim: ``ArrayList<String> string = new ArrayList<>()``
 
 Também é possível fazer um ArrayList com o tamanho que eu preciso ou indicando outro Array: ``ArrayList lista = new ArrayList(26);`` e ``ArrayList nova = new ArrayList(lista);`` respectivamente. 
+
+### Equals
+
+Equals é outro método que existe na classe **Object** que está lá para ser sobreescrito, igual **toString**, por exemplo.
+
+### ArrayList x LinkedList
+
+Para o ArrayList é muito custoso quando apagamos um elemento dele, pois ele precisa reorganizar tudo. Por outro lado, conseguimos acessar qualquer elemento via indice. Já o LinkedList consegue trabalhar bem quando algum elemento é excluído, mas para acessar o último elemento da lista, ele precisa passar para todos os outros. 
+
+O LinkedList também tem os métodos remove, contains, size e etc. LinkedList também é do pacote java.util.
+
+Também é possível usar a interface **List** como se fosse uma referência mais genérica entre LinkedList e ArrayList.
+
+List é uma interface, a ArrayList e a LinkedList são implementações
