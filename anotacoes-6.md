@@ -83,4 +83,12 @@ O LinkedList também tem os métodos remove, contains, size e etc. LinkedList ta
 
 Também é possível usar a interface **List** como se fosse uma referência mais genérica entre LinkedList e ArrayList.
 
-List é uma interface, a ArrayList e a LinkedList são implementações
+List é uma interface, a ArrayList e a LinkedList são implementações.
+
+### Vector
+
+O Vector é também um array e uma lista, é utilizado para multi threads. O vector é threadsafe. 
+
+### Collection
+
+As listas (ArrayList, LinkedList e Vector) são estenções da interface java.util.Collection. 
