@@ -1,4 +1,4 @@
-# Curso 5 (De 22/03/2021 a 00/03/2021)
+# Curso 5 (De 22/03/2021 a 08/05/2021)
 
 ## Java e java.util
 
@@ -92,3 +92,101 @@ O Vector é também um array e uma lista, é utilizado para multi threads. O vec
 ### Collection
 
 As listas (ArrayList, LinkedList e Vector) são estenções da interface java.util.Collection. 
+
+### Classes wrappers 
+
+Existem algumas classes no Java que tem como objetivo "substituir" os tipos primitivos. A classe ``Integer`` é uma dessas classes. 
+
+Ela possui algumas funcionalidades bem importantes como parsing, autoboxing e etc.
+
+O Autoboxing é uma funcionalidade que auxilia o desenvolvedor quando ele tenta apontar uma variável primitiva dentro de uma lista (ArrayList, LinkedList e Vector).Como essas listas guardam somente referências, o compilador pega essa variável primitiva e faz o autoboxing, que transforma transforma o valor primitivo em uma referência. O Autoboxing é feito com a criação de uma classe Wrapper. 
+
+Dentro da classe Integer também existem alguns métodos que fazem o parsing dos valores, transformando uma string em um int, por exemplo.
+
+Também existe o unboxing, que desembrula ou desemcapsula o primitivo da referência. Ou seja, tira o primtivo da classe Wrapper. 
+
+### Exemplo de autoboxing e unboxing
+
+```java
+
+// Integer
+
+Integer iRef = Integer.valueOf(29); // Autoboxing
+System.out.println(iRef.intValue()); // Unboxing
+
+```
+
+Não existe a necessidade de fazer o autoboxing através do ``Integer.valueOf()``, visto que o compilador faz isso automaticamente. Mas é uma boa prática deixar isso claro. 
+
+### Herança dos wrappers
+
+Os wrappers númericos (double, float e long) estendem a classe ``Number``. Então existe uma referência mais genérica para essas classes. 
+
+A classe ``Number`` também estende a classe ``Object``.
+
+### Ordenção
+
+Podemos usar duas interfaces para ordenação: java.util.Comparator e java.lang.Comparable. 
+
+Usando o Comparable, podemos criar uma ordem natural dentro da classe do elemento sendo comparado. 
+
+Dentro de Comparable também podemos usar o método shuffle, reverse e rotate.
+
+### Classes anônimas
+
+Quando criamos uma classes, precisamos definir quais são os seus atributos e métodos. Porém, as vezes precisamos só de um método novo que não se encaixa em nenhuma classe que já temos. Para isso, podemos criar classes anônimas para implementar o método que precisamos. 
+
+Exemplo:
+
+```java 
+      Comparator comp = new Comparator<Conta>() {
+    		@Override
+    		public int compare(Conta c1, Conta c2) {
+    			String nomeC1 = c1.getTitular().getNome();
+    			String nomeC2 = c2.getTitular().getNome();
+    			return nomeC1.compareTo(nomeC2);
+    		}
+    	};
+```
+
+Ou
+
+```java
+      Comparator comp = new Comparator<Conta>() {
+    		@Override
+    		public int compare(Conta c1, Conta c2) {
+    			String nomeC1 = c1.getTitular().getNome();
+    			String nomeC2 = c2.getTitular().getNome();
+    			return nomeC1.compareTo(nomeC2);
+    		}
+    	};
+
+```
+
+### Lambdas
+
+Com os Lambdas conseguimos encurtar muito o código acima.
+
+Exemplo:
+
+```java
+lista.sort((c1, c2) -> Integer.compare(c1.getNumero(), c2.getNumero()));
+```
+
+```java
+Comparator<Conta> comp = (Conta c1, Conta c2) -> {
+		String nomeC1 = c1.getTitular().getNome();
+   		String nomeC2 = c2.getTitular().getNome();
+   		return nomeC1.compareTo(nomeC2);
+	};
+```
+
+### Foreach
+
+Podemos usar um laço especifico para percorrer uma lista. Abaixo segue sintaxe: 
+
+```java
+lista.forEach((conta) -> System.out.println(conta + ", " + conta.getTitular().getNome()));
+```
+
+
