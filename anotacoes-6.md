@@ -1,4 +1,4 @@
-# Curso 5 (De 22/03/2021 a 08/05/2021)
+# Curso 6 (De 22/03/2021 a 08/05/2021)
 
 ## Java e java.util
 
