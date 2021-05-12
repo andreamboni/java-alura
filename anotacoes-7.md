@@ -168,3 +168,84 @@ public class TesteLeitura {
 
 }
 ```
+
+### Escrevendo em um arquivo
+
+Dessa vez vamos fazer a escrita de um texto em um arquivo específico. O nosso código vai ficar bem parecido, só que ao invés de usarmos **Input Stream** e **Reader**, nós vamos usar **Output Stream** e **Writer**.
+
+O nosso código vai ficar assim: 
+
+```java
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+
+public class TesteEscrita {
+
+	public static void main(String[] args) throws IOException {
+		
+		//Fluxo de entrada com um arquivo
+		OutputStream fis = new FileOutputStream("lorem2.txt");
+		Writer osw = new OutputStreamWriter(fis);
+		BufferedWriter bw = new BufferedWriter(osw);
+		
+		bw.write("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,");
+		bw.newLine();
+		bw.newLine();
+		bw.write("totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.");
+		
+		bw.close();
+	}
+
+}
+```
+
+### Leitura e escrita
+
+É possível fazer a leitura tanto de um arquivo, input no teclado ou de um servidor para depois escrever em um arquivo, printar no console ou ser um output em uma aplicação web. Abaixo segue um exemplo de como isso pode ser feito:
+
+```java
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
+
+public class TesteLeituraEscrita {
+	
+	public static void main(String[] args) throws IOException {
+		
+		Socket s = new Socket();
+		
+		// Fluxo de entrada
+		InputStream fis = s.getInputStream(); //System.in //new FileInputStream("dbz-intro.txt");
+		InputStreamReader isr = new InputStreamReader(fis);
+		BufferedReader br = new BufferedReader(isr);
+
+		// Fluxo de escrita/saida
+		OutputStream fus = s.getOutputStream(); //System.out //new FileOutputStream("dbz-intro-novo.txt");
+		OutputStreamWriter osw = new OutputStreamWriter(fus);
+		BufferedWriter bw = new BufferedWriter(osw);
+		
+		String line = br.readLine();
+
+		while(line != null && !line.isEmpty()) {
+			bw.write(line);
+			bw.newLine();
+			line = br.readLine();
+		}
+		
+		br.close();
+		bw.close();
+		
+	}
+}
+```
