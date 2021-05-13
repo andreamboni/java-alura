@@ -214,7 +214,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.InputStreamReader; 
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
@@ -247,5 +247,151 @@ public class TesteLeituraEscrita {
 		bw.close();
 		
 	}
+}
+```
+
+### Simplificando o nosso código
+
+Como sempre, temos uma opção mais simples e menos verbosa para escrever em um arquivo. Podemos usar a classe `FileWriter` com o construtor que recebe um `File` como argumento. O nosso código ficaria assim: 
+
+```java
+
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.Writer;
+import java.io.OutputStreamWriter;
+
+public class TesteEscrita2 {
+
+	public static void main(String[] args) throws IOException {
+		
+		FileWriter fw = new FileWriter("lorem2.txt");
+		
+		fw.write("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,");
+		fw.write(System.lineSeparator());
+		fw.write("totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.");
+		
+		fw.close();
+	}
+}
+```
+
+O `FileWriter` não possui o método `newLine()`. Para obter o mesmo resultado, nós podemos fazer de duas formas: usando `write("\n")` ou `write(System.lineSeparator())`.
+
+A boa prática é sempre utilizar o `write(System.lineSeparator())`, pois dependendo do sistema operacional, o `write("\n")` não funciona. Se for Windows, por exemplo, temos que escrever `write("\r\n")`.
+
+O Nico comentou que ele prefere usar o `BufferedWriter` para fazer a escrita no arquivo. O código ficaria assim: 
+
+
+```java
+
+public class TesteEscrita2 {
+
+	public static void main(String[] args) throws IOException {
+		
+		FileWriter fw = new FileWriter("lorem2.txt");
+		BufferedWriter bw = new BufferedWriter(fw);
+
+		fw.write("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,");
+		bw.newLine();
+		fw.write("totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.");
+		
+		fw.close();
+	}
+}
+```
+
+Ou
+
+```java
+
+public class TesteEscrita2 {
+
+	public static void main(String[] args) throws IOException {
+		
+		BufferedWriter bw = new BufferedWriter(new FileWriter("lorem2.txt"));
+
+		fw.write("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,");
+		bw.newLine();
+		fw.write("totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.");
+		
+		fw.close();
+	}
+}
+```
+
+### PrintStream e PrintWriter
+
+No **Java 1.0** só era possível escrever em arquivos através de **Streams**, ou seja, recebendo informações **binárias**. A classe **PrintStream** era utilizada para isso. O nosso código ficaria assim usando essa classe:
+
+```java
+public class TesteEscrita3 {
+
+	public static void main(String[] args) throws IOException {
+		PrintStream ps = new PrintStream("lorem2.txt");
+		
+		ps.println("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,");
+		ps.println();
+		ps.println("totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.");
+		
+		ps.close();
+	}
+}
+```
+
+Note que para escrever no arquivo, estamos usando o método `println`, o mesmo que vimos no nosso famoso `sysout`. 
+
+Se formos desmontar o sysout agora, podemos entender que acessamos a **classe** `System`, usamos o **output stream** `out` para indicar que vamos exibir a informação no console e o **método** `println` para printar o conteúdo e pular uma linha. 
+
+Depois na versão 1.1 foram introduzidor os Writers, que recebem informações em caracteres. Isso é bom porque com o Writer nós especificamos o padrão queremos que seja exibido simplesmente escrevendo o nosso texto. Diferente do OutputStream que tem que converter o fluxo de bytes em caracteres com base na codificação padrão da plataforma utilizada. 
+
+Usando o PrintWriter, o nosso código fica bem parecido. 
+
+```java
+public class TesteEscrita3 {
+
+	public static void main(String[] args) throws IOException {
+		PrintWriter pw = new PrintWriter("lorem2.txt");
+		
+		pw.println("Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,");
+		pw.println();
+		pw.println("totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.");
+		
+		pw.close();
+	}
+}
+```
+
+Assim como o **PrintStream**, o **PrintWriter** também tem o método `println`.
+
+### currentTimeMillis
+
+O **currentTimeMillis** é um método da classe **System** que informa os milissegundos que passaram desde 1 de janeiro de 1970. Essa data é considerada o início da Era Unix ou Unix Epoch, que o Java também usa. Ou seja, essa data é o marco zero no sistema de calendário usado nos sistemas operacionais UNIX.
+
+Agora sendo mais prático, você verá esse método para medir o tempo de execução de algum trecho de código. Por exemplo, podemos medir a escrita:
+
+```java
+public class TesteEscritaFileWriter {
+
+    public static void main(String[] args) throws IOException {
+
+        long ini = System.currentTimeMillis();
+
+        BufferedWriter bw = new BufferedWriter(new FileWriter("lorem2.txt"));
+
+        bw.write("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod");
+        bw.newLine();
+        bw.write("tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam");
+
+        bw.close();
+
+        long fim = System.currentTimeMillis();
+
+        System.out.println("Passaram " + (fim - ini) + " milissegundos");
+
+    }
 }
 ```
