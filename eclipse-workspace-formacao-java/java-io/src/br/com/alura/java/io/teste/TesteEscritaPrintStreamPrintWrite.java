@@ -10,7 +10,7 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.Writer;
 
-public class TesteEscrita3 {
+public class TesteEscritaPrintStreamPrintWrite {
 
 	public static void main(String[] args) throws IOException {
 //		PrintStream ps = new PrintStream("lorem2.txt");
