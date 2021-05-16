@@ -439,3 +439,85 @@ public class TesteLeitura2 {
 	}
 }
 ```
+
+
+### Serialização
+
+A **serialização** é quando transformamos um objeto em um fluxo binário e a **desserialização** é quando fazemos o fluxo inverso, ou seja, transforma o fluxo binário em um objeto. 
+
+#### Exemplo com um objeto padrão
+
+```java
+package br.com.alura.java.io.teste;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+public class TesteSerializacao {
+	
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+
+		// Serialização
+		String nome = "Nico Steppat";
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("object.bin"));
+		oos.writeObject(nome);
+		
+        // Desserialização
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream("object.bin"));
+		String nome2 = (String) ois.readObject();// Como eu recebo um Objeto, a referência mais genérica possível, eu preciso fazer um casting 
+		System.out.println(nome2);
+		
+		oos.close();
+		ois.close();
+		
+	}
+}
+```
+
+#### Exemplo com um objeto não padrão
+
+```java
+package br.com.alura.java.io.teste;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+public class TesteSerializacaoCliente {
+	
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+		
+		Cliente cliente = new Cliente();
+		cliente.setNome("Nico");
+		cliente.setProfissao("Dev");
+		cliente.setCpf("46532158660");
+		
+		// Serialização
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("cliente.bin"));
+		oos.writeObject(cliente);
+		
+		// Desserialização
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream("cliente.bin"));
+		Cliente cliente2 = (Cliente) ois.readObject();
+		
+		System.out.println(cliente2.getNome());
+		System.out.println(cliente2.getCpf());
+		System.out.println(cliente2.getProfissao());
+		
+		oos.close();
+		ois.close();
+		
+	}
+}
+```
+
+Quando existe herança e associação, todas as classes envolvidas precisam ser **Seriazable**. Caso eu queria um atributo que tem uma classe como tipo que eu não quero que seja serializado, eu uso a palavra chave **transient**, assim a exceção não será lançada, mas o atributo virá como null.
+
+Quando a gente quer serializar a classe, é boa prática inserir o **serialVersionUID**. Qualquer mudança tanto nos métodos quanto nos atributos, precisa ser gerado um novo ID, caso contrário será lançada uma exceção. Existem exceções diferentes quando um método ou um atributo é alterado. Se o método é alterado, muda o ID, quando um atributo é alterado, ele fala que o atributo não é compativel. **TODO:** mais testes sobre isso. 
+
+Se o serialVersionUID não for informado, ele será gerando dinamicamente. 
