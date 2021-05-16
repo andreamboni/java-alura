@@ -1,4 +1,4 @@
-# Curso 7 (De 10/05/2021 a /2021)
+# Curso 7 (De 10/05/2021 a 16/05/2021)
 
 ## Java e java.io
 
