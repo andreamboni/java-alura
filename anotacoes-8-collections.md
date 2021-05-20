@@ -93,3 +93,7 @@ public class TestaListaDeAula {
 	}
 }
 ```
+
+### Sets e equals
+
+Existe um problema com o set que é o equals. Quando a gente vai comparar elementos ou procurar dentro do set, precisamos usar o contains. Preciso dar uma lidinha melhor sobre isso. 
