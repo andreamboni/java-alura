@@ -29,6 +29,12 @@ public class Funcionario {
 	}
 
 	public void reajustarSalario(BigDecimal reajuste) {
-		this.salario = this.salario.add(reajuste).setScale(2, RoundingMode.HALF_UP);
+		this.salario = this.salario.add(reajuste);
+		arredondarSalario();
+	}
+
+	// Metodo privado não é testado individualmente, pois ele já é testado no metodo acima, por exemplo.
+	private void arredondarSalario() {
+		this.salario = this.salario.setScale(2, RoundingMode.HALF_UP);	
 	}
 }
