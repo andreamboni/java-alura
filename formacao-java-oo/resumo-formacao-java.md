@@ -18,4 +18,3 @@ Os quatro pilares da programação OO são:
 [POO: o que é programação orientada a objetos?]([https://link](https://www.alura.com.br/artigos/poo-programacao-orientada-a-objetos))
 [Intro to Object Oriented Programming - Crash Course
 ]([https://link](https://www.youtube.com/watch?v=SiBw7os-_zI&t=182s))
-
