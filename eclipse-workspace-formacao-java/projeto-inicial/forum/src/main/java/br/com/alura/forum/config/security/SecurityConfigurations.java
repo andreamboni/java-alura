@@ -19,8 +19,8 @@ import br.com.alura.forum.repository.UsuarioRepository;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
-	
-	/*Só criar os métodos, já é possível fazer a listagem dos items*/
+
+	/* Só criar os métodos, já é possível fazer a listagem dos items */
 
 	@Autowired
 	private AutenticacaoService autenticacaoService;
@@ -28,36 +28,35 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	private TokenService tokenService;
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
 	@Override
 	@Bean
 	protected AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();
 	}
-	
-	
+
 	// Configuração de autenticação
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(autenticacaoService).passwordEncoder(new BCryptPasswordEncoder());
 	}
-	
+
 	// Configuração de permissão
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-		.antMatchers(HttpMethod.GET, "/topicos").permitAll()
-		.antMatchers(HttpMethod.GET, "/topicos/*").permitAll()
-		.antMatchers(HttpMethod.POST, "/auth").permitAll()
-		.anyRequest().authenticated()
-		.and().csrf().disable()
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		.and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository), UsernamePasswordAuthenticationFilter.class);
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/topicos").permitAll()
+				.antMatchers(HttpMethod.GET, "/topicos/*").permitAll().antMatchers(HttpMethod.POST, "/auth").permitAll()
+				.antMatchers(HttpMethod.GET, "/actuator/**").permitAll().anyRequest().authenticated().and().csrf()
+				.disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository),
+						UsernamePasswordAuthenticationFilter.class);
 	}
-	
+
 	// Configuracao de recursos estaticos (js, css, imgs e etc.)
 	@Override
 	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**",
+				"/swagger-resources/**");
 	}
-	
+
 }
