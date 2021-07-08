@@ -44,12 +44,16 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	// Configuração de permissão
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/topicos").permitAll()
-				.antMatchers(HttpMethod.GET, "/topicos/*").permitAll().antMatchers(HttpMethod.POST, "/auth").permitAll()
-				.antMatchers(HttpMethod.GET, "/actuator/**").permitAll().anyRequest().authenticated().and().csrf()
-				.disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-				.addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository),
-						UsernamePasswordAuthenticationFilter.class);
+		http.authorizeRequests()
+				.antMatchers(HttpMethod.GET, "/topicos").permitAll()
+				.antMatchers(HttpMethod.GET, "/topicos/*").permitAll()
+				.antMatchers(HttpMethod.POST, "/auth").permitAll()
+				.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
+				.antMatchers(HttpMethod.DELETE, "/actuator/**").hasRole("MODERADOR")
+				.anyRequest().authenticated()
+				.and().csrf().disable()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository),	UsernamePasswordAuthenticationFilter.class);
 	}
 
 	// Configuracao de recursos estaticos (js, css, imgs e etc.)
